@@ -85,5 +85,29 @@ void setup() {
 }
 
 void loop() {
-  
+  if (millis() - api_lasttime > api_mtbs)  {
+    if(api.getChannelStatistics(CHANNEL_ID))
+    {
+      subs_count = api.channelStats.subscriberCount ; // Store subscriber count in subs_count
+      view_count = api.channelStats.viewCount ; // Store view count in view_count
+
+      // OLED sixth screen
+      display.clear();
+      display.drawString(0,8, "S: ");
+      display.drawString(24,8, subs_count);
+      display.drawString(0,32,"V: ");
+      display.drawString(24,32, view_count);
+      display.display();
+
+      // Print content to Serial monitor
+      Serial.println("---------Status---------");
+      Serial.println("Zeno_Modiff"); // Replace with your name
+      Serial.print("S: ");
+      Serial.println(subs_count); 
+      Serial.print("V: ");
+      Serial.println(view_count);
+      Serial.println("------------------------");
+    }
+    api_lasttime = millis();
+  }
 }
