@@ -12,7 +12,11 @@
 // Revision: 2
 // Last Edited: 24 Mar 2019
 
-
+// Pin positions
+// VCC - VCC pin
+// GND - GND pin
+// SCL - D0
+// SDA - D1
 
 #include <YoutubeApi.h> // Library to get data from youtube
 #include <ESP8266WiFi.h> // Library for Wifi communication
