@@ -26,18 +26,64 @@ void setup() {
   display.flipScreenVertically(); // For OLED display
   display.setFont(ArialMT_Plain_24); // For OLED display
 
-  //For establishing WiFi connection
+  // For WiFi connection
   WiFi.mode(WIFI_STA);
   WiFi.disconnect();
   delay(100);
 
-  //For OLED boot screen
+  // For OLED boot screen
   display.drawString(0,6, "ZenoModiff"); // Replace text with your name
-  display.display();
-  delay(5000);
+  display.display(); // For displaying the content
+  delay(2000); // Set delay for 2 seconds
+  display.clear(); // Clear display
+  
+  // OLED second screen
+  display.drawString(0,6, "Youtube");
+  display.drawString(0,32, "Sub Count");
+  display.display(); // For displaying the content
+  delay(2000); // Set delay for 2 seconds
+  display.clear(); // Clear display
+
+  Serial.print("Connecting Wifi: "); // print text to serial monitor
+  
+  // OLED third screen
+  display.drawString(0,6, "Connecting ");
+  display.drawString(0,32, "  Wifi... ");
+  display.display(); // For displaying the content
+  delay(250);
+  display.clear(); // Clear display
+
+  Serial.println(ssid); // Print WiFi SSID to serial monitor
+
+  WiFi.begin(ssid, password); // Establish connection to given SSID
+
+  // WiFi connection process
+  while (WiFi.status() != WL_CONNECTED) {
+  Serial.print("."); // To know in serial monitor that the connection process is going on
+  delay(500);
+  }
+  // Print content to Serial monitor
+  Serial.println("");
+  Serial.println("WiFi");
+  Serial.println("IP address: ");
+  IPAddress ip = WiFi.localIP(); // To get IP address
+  Serial.println(ip); // Print IP address to Serial monitor
+
+  // OLED forth screen
+  display.drawString(0,6, "Connected ");
+  display.display(); // For displaying the content
+  display.clear(); // Clear display
+  delay(1000); // Set delay for 1 seconds
+
+  // OLED fifth screen
+  display.drawString(0,6, "Getting");
+  display.drawString(0,32, "Data.....");
+  display.display(); // For displaying the content
+  display.clear(); // Clear display
+  delay(250);
+
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
+  
 }
